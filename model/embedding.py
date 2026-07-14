@@ -6,9 +6,9 @@ class TransformerEmbedding(nn.Module):
     def __init__(self, config: ModelConfig):
         super().__init__()
         # Embedding table created for storing the vocabulary embeddings.
-        self.token_embedding_table = nn.Embedding(config.vocab_size, config.embd_dim)
+        self.token_embedding_table = nn.Embedding(config.vocab_size, config.embedding_dim)
         # Embedding table created for storing the positional encodings.
-        self.position_embedding_table = nn.Embedding(config.block_size, config.embd_dim)
+        self.position_embedding_table = nn.Embedding(config.block_size, config.embedding_dim)
         # Dropout layer added for regularization to prevent overfitting.
         self.dropout = nn.Dropout(config.dropout)
 
@@ -17,6 +17,6 @@ class TransformerEmbedding(nn.Module):
         # B ->Batch size, meaning the number of sentences to be processed at once, T->Sequence length, meaning the number of tokens in each sentence.
         B,T = idx.size()
         # Fetching the token embeddings from the vocabulary embedding table using the input tensor of token indices.
-        # Output shape of token_emb is (B,T,config.emd_dim)
+        # Output shape of token_emb is (B,T,config.embedding_dim)
         x = self.token_embedding_table(idx)
         return self.dropout(x)

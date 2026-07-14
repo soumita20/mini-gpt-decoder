@@ -11,7 +11,7 @@ class ModelConfig:
     #Context window length
     block_size: int = 256
     #Hidden dimension of the feedforward layers
-    embd_dim: int = 384
+    embedding_dim: int = 384
     #Number of attention heads(embed_dim//num_heads must be an integer)
     num_heads: int = 6
     #Depth of the decoder blocks
@@ -23,5 +23,5 @@ class ModelConfig:
 
 def __post_init__(self):
     #Ensuring that the embedding dimensions are completely divisible by the number of attention heads
-    if self.embd_dim % self.num_heads!=0:
-        raise ValueError(f"Embedding dimension {self.embd_dim} must be divisible by the number of attention heads {self.num_heads}.")
+    if self.embedding_dim % self.num_heads!=0:
+        raise ValueError(f"Embedding dimension {self.embedding_dim} must be divisible by the number of attention heads {self.num_heads}.")
